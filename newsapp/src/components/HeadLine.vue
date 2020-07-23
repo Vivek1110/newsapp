@@ -1,16 +1,16 @@
 <template>
     <v-container>
         <v-row>
-            Test
+            <app-toppanel />
         </v-row>
     </v-container>
 </template>
 
 <script>
-import Header from '../components/header/Header'
+import TopPanel from '../components/header/TopPanel'
 export default {
     components: {
-        'app-header': Header
+        'app-toppanel': TopPanel
     }
 }
 </script>
