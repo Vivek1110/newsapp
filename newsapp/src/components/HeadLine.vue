@@ -1,16 +1,50 @@
-<template>
-    <v-container>
-        <v-row>
-            <app-toppanel />
-        </v-row>
-    </v-container>
+<template >
+  <v-container>
+ 
+    <v-row>
+      <TopPanel />
+    </v-row>
+    <v-row>
+      <v-col cols='12'>
+          <v-layout v-if='loading'>
+            <div style="position: absolute; left: 50%; top: 50%">
+                <v-progress-circular
+                style="position: absolute"
+                :size="70"
+                :width="7"
+                color="purple"
+                indeterminate
+              ></v-progress-circular>
+            </div>
+        </v-layout>
+        <v-layout row wrap v-else>
+          <v-flex xs12 sm6 lg3 v-for="(article, index) in articles" :key='index'>
+              <CustomCard :article='article' :index='index'/>
+          </v-flex>
+        </v-layout>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
-import TopPanel from '../components/header/TopPanel'
-export default {
+import CustomCard from './cards/CustomCard'
+import TopPanel from './header/TopPanel'
+import { mapGetters } from 'vuex';
+  export default {
+    data() {
+      return {
+      }
+    },
     components: {
-        'app-toppanel': TopPanel
+        CustomCard,
+        TopPanel
+    },
+    computed: {
+        ...mapGetters({
+            articles: 'articles',
+            loading: 'loading'
+        })
     }
-}
+  }
 </script>
